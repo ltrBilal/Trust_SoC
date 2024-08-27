@@ -1,8 +1,8 @@
 *.vcd
 *.cf
-test.vhd
+*test.vhd
 *.ghw
-waveform.gtkw
+*waveform.gtkw
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
