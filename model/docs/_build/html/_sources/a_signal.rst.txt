@@ -1,0 +1,7 @@
+a\_signal module
+================
+
+.. automodule:: a_signal
+   :members:
+   :undoc-members:
+   :show-inheritance:

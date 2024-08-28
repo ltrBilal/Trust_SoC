@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>a_signal module &mdash; VHDL generation model 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=8d563738"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="colors module" href="colors.html" />
+    <link rel="prev" title="model" href="modules.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            VHDL generation model
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">model</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">a_signal module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#a_signal.Clock"><code class="docutils literal notranslate"><span class="pre">Clock</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#a_signal.Clock.direction"><code class="docutils literal notranslate"><span class="pre">Clock.direction</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#a_signal.Clock.type"><code class="docutils literal notranslate"><span class="pre">Clock.type</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#a_signal.Signal"><code class="docutils literal notranslate"><span class="pre">Signal</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#a_signal.Signal.copy"><code class="docutils literal notranslate"><span class="pre">Signal.copy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#a_signal.Signal.nb_bits"><code class="docutils literal notranslate"><span class="pre">Signal.nb_bits</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#a_signal.Signal.possible_types"><code class="docutils literal notranslate"><span class="pre">Signal.possible_types</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#a_signal.Signal.signal_to_vhdl"><code class="docutils literal notranslate"><span class="pre">Signal.signal_to_vhdl()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="colors.html">colors module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="component.html">component module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exception.html">exception module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html">functions module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generic.html">generic module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main.html">main module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="my_parser.html">my_parser module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="port.html">port module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="process.html">process module</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">VHDL generation model</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">model</a></li>
+      <li class="breadcrumb-item active">a_signal module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/a_signal.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-a_signal">
+<span id="a-signal-module"></span><h1>a_signal module<a class="headerlink" href="#module-a_signal" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="a_signal.Clock">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">a_signal.</span></span><span class="sig-name descname"><span class="pre">Clock</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">period</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/a_signal.html#Clock"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#a_signal.Clock" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#a_signal.Signal" title="a_signal.Signal"><code class="xref py py-class docutils literal notranslate"><span class="pre">Signal</span></code></a></p>
+<p>Clock class to represent a clock signal.</p>
+<section id="attributes">
+<h2>Attributes<a class="headerlink" href="#attributes" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>type<span class="classifier">str, constant</span></dt><dd><p>The type of the clock signal, always “std_logic”.</p>
+</dd>
+<dt>direction<span class="classifier">str, constant</span></dt><dd><p>The direction of the clock signal, always “in”.</p>
+</dd>
+<dt>name<span class="classifier">str</span></dt><dd><p>The name of the clock signal.</p>
+</dd>
+<dt>period<span class="classifier">int</span></dt><dd><p>The period of the clock, used for simulations.</p>
+</dd>
+<dt>unit<span class="classifier">str</span></dt><dd><p>The time unit of the clock period, e.g., ‘ns’, ‘us’, ‘ms’, ‘s’.</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="a_signal.Clock.direction">
+<span class="sig-name descname"><span class="pre">direction</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'in'</span></em><a class="headerlink" href="#a_signal.Clock.direction" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="a_signal.Clock.type">
+<span class="sig-name descname"><span class="pre">type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'std_logic'</span></em><a class="headerlink" href="#a_signal.Clock.type" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="a_signal.Signal">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">a_signal.</span></span><span class="sig-name descname"><span class="pre">Signal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type_or_number_of_bits</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">direction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/a_signal.html#Signal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#a_signal.Signal" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Signal class to represent a digital signal.</p>
+<section id="id1">
+<h2>Attributes<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>name<span class="classifier">str</span></dt><dd><p>The name of the signal.</p>
+</dd>
+<dt>type<span class="classifier">str</span></dt><dd><p>The type of the signal (e.g., “integer”, “std_logic”, “std_logic_vector”).</p>
+</dd>
+<dt>direction<span class="classifier">str</span></dt><dd><p>The direction of the signal, can be ‘in’, ‘out’, or None.</p>
+</dd>
+<dt>value<span class="classifier">str</span></dt><dd><p>The value of the signal.</p>
+</dd>
+<dt>key<span class="classifier">str</span></dt><dd><p>The key for the signal, can be ‘variable’, ‘signal’, ‘constant’, or None.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="a_signal.Signal.copy">
+<span class="sig-name descname"><span class="pre">copy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/a_signal.html#Signal.copy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#a_signal.Signal.copy" title="Link to this definition"></a></dt>
+<dd><p>Creates a copy of the signal.</p>
+<section id="returns">
+<h3>Returns<a class="headerlink" href="#returns" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>Signal</dt><dd><p>A new Signal object with the same attributes.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="a_signal.Signal.nb_bits">
+<span class="sig-name descname"><span class="pre">nb_bits</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#a_signal.Signal.nb_bits" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="a_signal.Signal.possible_types">
+<span class="sig-name descname"><span class="pre">possible_types</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['integer',</span> <span class="pre">'std_logic']</span></em><a class="headerlink" href="#a_signal.Signal.possible_types" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="a_signal.Signal.signal_to_vhdl">
+<span class="sig-name descname"><span class="pre">signal_to_vhdl</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/a_signal.html#Signal.signal_to_vhdl"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#a_signal.Signal.signal_to_vhdl" title="Link to this definition"></a></dt>
+<dd><p>Generates the VHDL code line for the signal.</p>
+<section id="id2">
+<h3>Returns<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>str</dt><dd><p>A string representing the VHDL code line.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+</section>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="modules.html" class="btn btn-neutral float-left" title="model" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="colors.html" class="btn btn-neutral float-right" title="colors module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Bilal LATRACH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

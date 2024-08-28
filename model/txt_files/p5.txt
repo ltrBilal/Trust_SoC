@@ -1,0 +1,39 @@
+if rising_edge(S_AXI_ACLK) then 
+	    if S_AXI_ARESETN = '0' then
+	      axi_awaddr <= (others => '0');
+	      axi_awburst <= (others => '0'); 
+	      axi_awlen <= (others => '0'); 
+	      axi_awlen_cntr <= (others => '0');
+	    else
+	      if (axi_awready = '0' and S_AXI_AWVALID = '1' and axi_awv_awr_flag = '0') then
+	      -- address latching 
+	        axi_awaddr <= S_AXI_AWADDR(C_S_AXI_ADDR_WIDTH - 1 downto 0);  ---- start address of transfer
+	        axi_awlen_cntr <= (others => '0');
+	        axi_awburst <= S_AXI_AWBURST;
+	        axi_awlen <= S_AXI_AWLEN;
+	      elsif((axi_awlen_cntr <= axi_awlen) and axi_wready = '1' and S_AXI_WVALID = '1') then     
+	        axi_awlen_cntr <= std_logic_vector (unsigned(axi_awlen_cntr) + 1);
+
+	        case (axi_awburst) is
+	          when "00" => -- fixed burst
+	            -- The write address for all the beats in the transaction are fixed
+	            axi_awaddr     <= axi_awaddr;       ----for awsize = 4 bytes (010)
+	          when "01" => --incremental burst
+	            -- The write address for all the beats in the transaction are increments by awsize
+	            axi_awaddr(C_S_AXI_ADDR_WIDTH - 1 downto ADDR_LSB) <= std_logic_vector (unsigned(axi_awaddr(C_S_AXI_ADDR_WIDTH - 1 downto ADDR_LSB)) + 1);--awaddr aligned to 4 byte boundary
+	            axi_awaddr(ADDR_LSB-1 downto 0)  <= (others => '0');  ----for awsize = 4 bytes (010)
+	          when "10" => --Wrapping burst
+	            -- The write address wraps when the address reaches wrap boundary 
+	            if (aw_wrap_en = '1') then
+	              axi_awaddr <= std_logic_vector (unsigned(axi_awaddr) - (to_unsigned(aw_wrap_size,C_S_AXI_ADDR_WIDTH)));                
+	            else 
+	              axi_awaddr(C_S_AXI_ADDR_WIDTH - 1 downto ADDR_LSB) <= std_logic_vector (unsigned(axi_awaddr(C_S_AXI_ADDR_WIDTH - 1 downto ADDR_LSB)) + 1);--awaddr aligned to 4 byte boundary
+	              axi_awaddr(ADDR_LSB-1 downto 0)  <= (others => '0');  ----for awsize = 4 bytes (010)
+	            end if;
+	          when others => --reserved (incremental burst for example)
+	            axi_awaddr(C_S_AXI_ADDR_WIDTH - 1 downto ADDR_LSB) <= std_logic_vector (unsigned(axi_awaddr(C_S_AXI_ADDR_WIDTH - 1 downto ADDR_LSB)) + 1);--for awsize = 4 bytes (010)
+	            axi_awaddr(ADDR_LSB-1 downto 0)  <= (others => '0');
+	        end case;        
+	      end if;
+	    end if;
+	  end if;

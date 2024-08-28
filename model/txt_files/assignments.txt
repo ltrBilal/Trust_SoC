@@ -1,0 +1,18 @@
+    
+    S_AXI_AWREADY	<= axi_awready;
+	S_AXI_WREADY	<= axi_wready;
+	S_AXI_BRESP	<= axi_bresp;
+	S_AXI_BUSER	<= std_logic_vector(to_unsigned(C_AXI_USER_ID, C_AXI_USER_ID_WIDTH))& std_logic_vector(to_unsigned(C_AXI_WORLD_ID, C_AXI_WORLD_ID_WIDTH));
+	S_AXI_BVALID	<= axi_bvalid;
+	S_AXI_ARREADY	<= axi_arready;
+	S_AXI_RDATA	<= axi_rdata;
+	S_AXI_RRESP	<= axi_rresp;
+	S_AXI_RLAST	<= axi_rlast;
+	S_AXI_RUSER	<= std_logic_vector(to_unsigned(C_AXI_USER_ID, C_AXI_USER_ID_WIDTH))& std_logic_vector(to_unsigned(C_AXI_WORLD_ID, C_AXI_WORLD_ID_WIDTH));
+	S_AXI_RVALID	<= axi_rvalid;
+	S_AXI_BID <= S_AXI_AWID;
+	S_AXI_RID <= S_AXI_ARID;
+	aw_wrap_size <= ((C_S_AXI_DATA_WIDTH)/8 * to_integer(unsigned(axi_awlen))); 
+	ar_wrap_size <= ((C_S_AXI_DATA_WIDTH)/8 * to_integer(unsigned(axi_arlen))); 
+	aw_wrap_en <= '1' when (((axi_awaddr AND std_logic_vector(to_unsigned(aw_wrap_size,C_S_AXI_ADDR_WIDTH))) XOR std_logic_vector(to_unsigned(aw_wrap_size,C_S_AXI_ADDR_WIDTH))) = low) else '0';
+	ar_wrap_en <= '1' when (((axi_araddr AND std_logic_vector(to_unsigned(ar_wrap_size,C_S_AXI_ADDR_WIDTH))) XOR std_logic_vector(to_unsigned(ar_wrap_size,C_S_AXI_ADDR_WIDTH))) = low) else '0';

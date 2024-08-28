@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>my_parser module &mdash; VHDL generation model 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=8d563738"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="port module" href="port.html" />
+    <link rel="prev" title="main module" href="main.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            VHDL generation model
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">model</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="a_signal.html">a_signal module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="colors.html">colors module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="component.html">component module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exception.html">exception module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html">functions module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generic.html">generic module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main.html">main module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">my_parser module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#my_parser.extract_components"><code class="docutils literal notranslate"><span class="pre">extract_components()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#my_parser.parser"><code class="docutils literal notranslate"><span class="pre">parser()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#my_parser.port_direction"><code class="docutils literal notranslate"><span class="pre">port_direction()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="port.html">port module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="process.html">process module</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">VHDL generation model</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">model</a></li>
+      <li class="breadcrumb-item active">my_parser module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/my_parser.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-my_parser">
+<span id="my-parser-module"></span><h1>my_parser module<a class="headerlink" href="#module-my_parser" title="Link to this heading"></a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="my_parser.extract_components">
+<span class="sig-prename descclassname"><span class="pre">my_parser.</span></span><span class="sig-name descname"><span class="pre">extract_components</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="component.html#component.Component" title="component.Component"><span class="pre">Component</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/my_parser.html#extract_components"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#my_parser.extract_components" title="Link to this definition"></a></dt>
+<dd><p>Extracts components from all Verilog files in a specified folder.</p>
+<section id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>folder<span class="classifier">str</span></dt><dd><p>The path to the folder containing Verilog files.</p>
+</dd>
+</dl>
+</section>
+<section id="returns">
+<h2>Returns<a class="headerlink" href="#returns" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>List[Component]</dt><dd><p>A list of Component objects extracted from the Verilog files.</p>
+</dd>
+</dl>
+</section>
+<section id="notes">
+<h2>Notes<a class="headerlink" href="#notes" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>The function performs the following steps:</dt><dd><ol class="arabic simple">
+<li><p>Uses <cite>glob</cite> to find all Verilog files in the specified folder.</p></li>
+<li><p>Iterates through the list of file paths, parsing each file to extract components.</p></li>
+<li><p>Adds successfully parsed components to the return list.</p></li>
+</ol>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="my_parser.parser">
+<span class="sig-prename descclassname"><span class="pre">my_parser.</span></span><span class="sig-name descname"><span class="pre">parser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="component.html#component.Component" title="component.Component"><span class="pre">Component</span></a></span></span><a class="reference internal" href="_modules/my_parser.html#parser"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#my_parser.parser" title="Link to this definition"></a></dt>
+<dd><p>Parses a Verilog file to extract the module name, generics, and ports, then creates a Component object.</p>
+<section id="id1">
+<h2>Parameters<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>file_name<span class="classifier">str</span></dt><dd><p>The name of the Verilog file to parse.</p>
+</dd>
+</dl>
+</section>
+<section id="id2">
+<h2>Returns<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>Component</dt><dd><p>A Component object representing the parsed Verilog module, or None in case of an error.</p>
+</dd>
+</dl>
+</section>
+<section id="raises">
+<h2>Raises<a class="headerlink" href="#raises" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>Exception</dt><dd><p>If an error occurs during parsing, it prints an error message and returns None.</p>
+</dd>
+</dl>
+</section>
+<section id="id3">
+<h2>Notes<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>The function performs the following steps:</dt><dd><ol class="arabic simple">
+<li><p>Initializes variables to store different parts of the module.</p></li>
+<li><p>Reads the Verilog file line by line, ignoring comments and empty lines.</p></li>
+<li><p>Detects the start of the module to capture the generic part.</p></li>
+<li><p>Captures I/O ports and their names for later use.</p></li>
+<li><p>Uses regular expressions to extract the module name, generics, and ports.</p></li>
+<li><p>Constructs <cite>Signal</cite>, <cite>Generic</cite>, and <cite>Port</cite> objects from the parsed data.</p></li>
+<li><p>Creates and returns a <cite>Component</cite> object representing the module.</p></li>
+</ol>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="my_parser.port_direction">
+<span class="sig-prename descclassname"><span class="pre">my_parser.</span></span><span class="sig-name descname"><span class="pre">port_direction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">direction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/my_parser.html#port_direction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#my_parser.port_direction" title="Link to this definition"></a></dt>
+<dd><p>Converts a Verilog port direction to a VHDL port direction.</p>
+<section id="id4">
+<h2>Parameters<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>direction<span class="classifier">str</span></dt><dd><p>The port direction in Verilog (“input”, “output”, “inout”).</p>
+</dd>
+</dl>
+</section>
+<section id="id5">
+<h2>Returns<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>str</dt><dd><p>The corresponding port direction in VHDL (“in”, “out”, “inout”).</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="main.html" class="btn btn-neutral float-left" title="main module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="port.html" class="btn btn-neutral float-right" title="port module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Bilal LATRACH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

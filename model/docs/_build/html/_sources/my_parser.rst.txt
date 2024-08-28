@@ -1,0 +1,7 @@
+my\_parser module
+=================
+
+.. automodule:: my_parser
+   :members:
+   :undoc-members:
+   :show-inheritance:
