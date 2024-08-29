@@ -22,14 +22,20 @@ entity interface_AXI is
         C_MASTER_ID_WIDTH      : integer := 3
     );
     port(
+        -- Memory configuration
+        rule_number        : in std_logic_vector(2 downto 0);
+        data_rule          : in std_logic_vector(15 downto 0);
+        w_rule_enable      : in std_logic; -- Signal to indicate that a rule is being written into memory
+
         -- Master IDs
         MID_R              : in std_logic_vector(C_MASTER_ID_WIDTH-1 downto 0); -- Signal for the ID of the master requesting the read
         MID_W              : in std_logic_vector(C_MASTER_ID_WIDTH-1 downto 0); -- Signal for the ID of the master requesting the write
 
-        rule_number        : in std_logic_vector(2 downto 0);
-        
-        w_rule_enable      : in std_logic; -- Signal to indicate that a rule is being written into memory
         x_enable           : in std_logic;
+
+        -- Signals for the responses
+        wrapper_write_response  : out std_logic;
+        wrapper_read_response   : out std_logic;
 
         ------------------------------------------- AXI signals -------------------------------------------
         -- Clock
@@ -105,14 +111,6 @@ end interface_AXI;
 
 architecture interface_AXI_arch of interface_AXI is
 
-    -- Signals for the responses
-    signal wrapper_write_response  :  std_logic;
-    signal wrapper_read_response   :  std_logic;
-
-    signal awready_latched : std_logic := '0';
-    signal wready_latched  : std_logic := '0';
-    signal arready_latched : std_logic := '0';
-
 begin
 
     wrapper_inst: entity work.wrapper
@@ -120,7 +118,7 @@ begin
         clk => S_AXI_ACLK,
         reset => S_AXI_ARESETN,
         w_rule_enable => w_rule_enable,
-        data_rule => S_AXI_WDATA,
+        data_rule => data_rule,
         rule_number => rule_number,
         MID_W => MID_W,
         MID_R => MID_R,
@@ -130,11 +128,5 @@ begin
         wrapper_write_response => wrapper_write_response,
         wrapper_read_response => wrapper_read_response
     );
-
-    -- write permission response
-    S_AXI_AWREADY <= wrapper_write_response;
-    S_AXI_WREADY  <= wrapper_write_response;
-    -- read permission response
-    S_AXI_ARREADY <= wrapper_read_response;
 
 end architecture;

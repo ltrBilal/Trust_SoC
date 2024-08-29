@@ -29,8 +29,9 @@ architecture rtl of Interface_AXI_tb is
     signal MID_W 			  : std_logic_vector(C_MASTER_ID_WIDTH-1 downto 0); -- signal pour l'ID du maitre qui demande l'écriture
 
     signal rule_number       : std_logic_vector(2 downto 0);
-    
+    signal data_rule         : std_logic_vector(15 downto 0);
     signal w_rule_enable	  : std_logic; -- signal pour indiquer qu'on est entrain d'écrire une règle dans la mémoire
+
     signal x_enable          : std_logic;
 
     -- signaux pour les réponses
@@ -122,11 +123,14 @@ begin
         C_MASTER_ID_WIDTH => C_MASTER_ID_WIDTH
     )
      port map(
+        rule_number => rule_number,
+        data_rule => data_rule,
+        w_rule_enable => w_rule_enable,
         MID_R => MID_R,
         MID_W => MID_W,
-        rule_number => rule_number,
-        w_rule_enable => w_rule_enable,
         x_enable => x_enable,
+        wrapper_write_response => wrapper_write_response,
+        wrapper_read_response => wrapper_read_response,
         S_AXI_ACLK => S_AXI_ACLK,
         S_AXI_ARESETN => S_AXI_ARESETN,
         S_AXI_AWID => S_AXI_AWID,
@@ -197,23 +201,23 @@ begin
     memory_process : process
     begin
         w_rule_enable <= '0';
-        S_AXI_WDATA <= (others => '-');
+        data_rule <= (others => '-');
         rule_number <= "---";
         wait for 5 us;
         rule_number <= "000";
         w_rule_enable <= '1';
-        S_AXI_WDATA <= "0000100000011111";
+        data_rule <= "0000100000011111";
         wait for 10 us;
         rule_number <= "001";
         w_rule_enable <= '1';
-        S_AXI_WDATA <= "1001000001111100";
+        data_rule <= "1001000001111100";
         wait for 10 us;
         rule_number <= "010";
         w_rule_enable <= '1';
-        S_AXI_WDATA <= "0011010001111110";
+        data_rule <= "0011010001111110";
         wait for 10 us;
         w_rule_enable <= '0';
-        S_AXI_WDATA <= (others => '-');
+        data_rule <= (others => '-');
         rule_number <= "---";
         wait;
     end process;
@@ -222,7 +226,7 @@ begin
     wrapper_process : process
     begin
         wait for 30 us;
--- TEST SUR LE CANAL D'ECRITURE
+    -- TEST SUR LE CANAL D'ECRITURE
         ---------------------------------- TEST 1 et 2 " resp est 0 pendant 20 us (n'a pas le droit a executer) "
         MID_W <= "000";
         MID_R <= (others => '-');
