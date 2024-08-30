@@ -1,6 +1,7 @@
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
+use std.textio.all;
 
 
 entity Interface_AXI_tb is
@@ -37,6 +38,43 @@ architecture rtl of Interface_AXI_tb is
     -- signaux pour les rÃ©ponses
     signal wrapper_write_response  : std_logic;
     signal wrapper_read_response   : std_logic;
+
+    -- Déclaration du fichier de log global
+    file log_file : text;
+
+    -- Déclaration de la fonction pour la vérification et l'écriture
+    function check_write_test( wrapper_response : std_logic; test_number : integer) return boolean is
+        variable log_line : line;
+    begin
+        if wrapper_write_response = wrapper_response then
+            report "Test PASSED" severity note;
+            return true;
+        else
+            report "Test FAILED" severity error;
+            write(log_line, string'("ERROR : test number "));
+            write(log_line, integer'image(test_number));
+            write(log_line, string'(" FAILED "));
+            writeline(log_file, log_line);
+            return false;
+        end if;
+    end function;
+
+    -- Déclaration de la fonction pour la vérification et l'écriture
+    function check_read_test( wrapper_response : std_logic; test_number : integer) return boolean is
+        variable log_line : line;
+    begin
+        if wrapper_read_response = wrapper_response then
+            report "Test PASSED" severity note;
+            return true;
+        else
+            report "Test FAILED" severity error;
+            write(log_line, string'("ERROR : test number "));
+            write(log_line, integer'image(test_number));
+            write(log_line, string'(" FAILED "));
+            writeline(log_file, log_line);
+            return false;
+        end if;
+    end function;
 
     ------------------------------------------- AXI signals -------------------------------------------
     -- Horloge
@@ -224,7 +262,10 @@ begin
 
     -- simulation pour le wrappeur
     wrapper_process : process
+        variable log_line : line; -- Variable for writing lines to the file
+        variable test_resp : boolean;
     begin
+        file_open(log_file, "test_bench.log", write_mode);
         wait for 30 us;
     -- TEST SUR LE CANAL D'ECRITURE
         ---------------------------------- TEST 1 et 2 " resp est 0 pendant 20 us (n'a pas le droit a executer) "
@@ -233,18 +274,22 @@ begin
         x_enable <= '1'; --RWX <= "011";    
         S_AXI_AWADDR <= "01100";
         wait for 20 us;
+        test_resp := check_write_test('0', 1);
+
         ---------------------------------- TEST 3 " resp est 0 ( ID n'existe pas ) "
         MID_W <= "101";
         MID_R <= (others => '-');
         x_enable <= '0'; --RWX <= "010";
         S_AXI_AWADDR <= "01100";
         wait for 10 us;
+        test_resp := check_write_test('0', 2);
         ---------------------------------- TEST 4 " resp est 1 "
         MID_W <= "000";
         MID_R <= (others => '-');
         x_enable <= '0'; --RWX <= "010";
         S_AXI_AWADDR <= "01100";
         wait for 10 us;
+        test_resp := check_write_test('0', 3);
         ---------------------------------- TEST 5 " resp est 0 ( ecriture hors addresse )"
         MID_W <= "000";
         MID_R <= (others => '-');
@@ -270,12 +315,17 @@ begin
         x_enable <= '1'; --RWX <= "101";
         S_AXI_ARADDR <= "01100";
         wait for 10 us;
+        
         ---------------------------------- TEST 9 " resp est 0 (LECTURE HORS ADDRESS) "
         MID_W <= (others => '-');
         MID_R <= "001";
         x_enable <= '1'; --RWX <= "101";
         S_AXI_ARADDR <= "11111";
         wait for 10 us;
+
+        -- close file
+        file_close(log_file);
+
         MID_W <= (others => '-');
         MID_R <= (others => '-');
         x_enable <= '-'; --RWX <= "101";
