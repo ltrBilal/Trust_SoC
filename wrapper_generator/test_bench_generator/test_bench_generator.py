@@ -1,5 +1,8 @@
 import math
 
+MEM_DEPTH : int = 8
+MEM_WIDTH : int = 16
+
 period : int = 10
 unite  : str = "us"
 
@@ -17,7 +20,7 @@ def hexa_to_binary(hexa, number_of_bits):
     decimal = int(hexa, 16)
     return decimal_to_binary(decimal, number_of_bits)
 
-def generate_vhdl(MEM_DEPTH : int, MEM_WIDTH : int):
+def generate_test_bench_file(MEM_DEPTH : int, MEM_WIDTH : int):
 
     ID_width : int = math.ceil(math.log2(MEM_DEPTH))
     rwx_width : int = 3
@@ -357,8 +360,7 @@ begin
             writeline(log_file, log_line);
             write(log_line, string'("{ADD} = {tab[2]}"));
             writeline(log_file, log_line);
-            write(log_line, string'("Expected {tab[3]} but the test return { 1 - int(tab[3]make
-            )}"));
+            write(log_line, string'("Expected {tab[3]} but the test return { 1 - int(tab[3])}"));
             writeline(log_file, log_line);
         end if;
 """
@@ -382,4 +384,4 @@ end architecture;
     test.write(test_bench)
 
 
-generate_vhdl(8, 16)
+generate_test_bench_file(MEM_DEPTH, MEM_WIDTH)

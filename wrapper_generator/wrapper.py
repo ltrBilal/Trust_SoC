@@ -1,6 +1,10 @@
 import math
 import argparse
 
+
+MEM_DEPTH : int = 8
+MEM_WIDTH : int = 16
+
 def generate_vhdl(MEM_DEPTH : int, MEM_WIDTH : int):
 
     ID_width : int = math.ceil(math.log2(MEM_DEPTH))
@@ -291,8 +295,6 @@ end architecture;
         f.write(interface_AXI)
 
 if __name__ == "__main__":
-    MEM_DEPTH : int = 8
-    MEM_WIDTH : int = 16
 
     parser = argparse.ArgumentParser(description='Generate VHDL files for a wrapper with specified MEM_DEPTH and MEM_WIDTH.')
     parser.add_argument('--mem_depth','-d', type=int, default= MEM_DEPTH, required=False, help='Memory depth (number of memory cells)')
@@ -305,4 +307,8 @@ if __name__ == "__main__":
     if MEM_DEPTH == args.mem_depth and MEM_WIDTH == args.mem_width:
         print(f"VHDL files generated with MEM_DEPTH = {MEM_DEPTH} and MEM_WIDTH = {MEM_WIDTH} to change this values use the -d and -w options")
     else:
+        MEM_DEPTH = args.mem_depth
+        MEM_WIDTH = args.mem_width
         print(f"VHDL files generated with MEM_DEPTH = {args.mem_depth} and MEM_WIDTH = {args.mem_width}")
+
+    
