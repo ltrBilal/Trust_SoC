@@ -357,7 +357,8 @@ begin
             writeline(log_file, log_line);
             write(log_line, string'("{ADD} = {tab[2]}"));
             writeline(log_file, log_line);
-            write(log_line, string'("Expected {tab[3]} but the test return { 1 - int(tab[3])}"));
+            write(log_line, string'("Expected {tab[3]} but the test return { 1 - int(tab[3]make
+            )}"));
             writeline(log_file, log_line);
         end if;
 """
