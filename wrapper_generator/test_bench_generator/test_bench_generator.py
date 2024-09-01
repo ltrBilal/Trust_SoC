@@ -1,4 +1,5 @@
 import math
+import argparse
 
 MEM_DEPTH : int = 8
 MEM_WIDTH : int = 16
@@ -384,4 +385,19 @@ end architecture;
     test.write(test_bench)
 
 
-generate_test_bench_file(MEM_DEPTH, MEM_WIDTH)
+if __name__ == "__main__":
+
+    parser = argparse.ArgumentParser(description='Generate VHDL test bench files for a wrapper with specified MEM_DEPTH and MEM_WIDTH.')
+    parser.add_argument('--mem_depth','-d', type=int, default= MEM_DEPTH, required=False, help='Memory depth (number of memory cells)')
+    parser.add_argument('--mem_width','-w', type=int, default= MEM_WIDTH, required=False, help='Memory width (width of each memory cell)')
+
+    args = parser.parse_args()
+
+    generate_test_bench_file( args.mem_depth, args.mem_width)
+
+    if MEM_DEPTH == args.mem_depth and MEM_WIDTH == args.mem_width:
+        print(f"VHDL test bench files generated with MEM_DEPTH = {MEM_DEPTH} and MEM_WIDTH = {MEM_WIDTH} to change this values use the -d and -w options")
+    else:
+        MEM_DEPTH = args.mem_depth
+        MEM_WIDTH = args.mem_width
+        print(f"VHDL test bench files generated with MEM_DEPTH = {args.mem_depth} and MEM_WIDTH = {args.mem_width}")
